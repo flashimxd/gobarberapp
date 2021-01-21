@@ -4,13 +4,19 @@ import React, {
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string;
+}
 interface Credentials {
   email: string;
   password: string;
 }
 
 interface AuthContextInterface {
-  user: object;
+  user: User;
   signIn: (credentials: Credentials) => Promise<void>;
   signOut: () => void;
   loading: boolean,
@@ -18,7 +24,7 @@ interface AuthContextInterface {
 
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
 }
 
 const AuthContext = createContext<AuthContextInterface>(
