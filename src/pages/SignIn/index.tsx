@@ -39,6 +39,7 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
 
   const handleSubmit = useCallback(async (data: SignInDTO) => {
+    console.log('handle sub');
     try {
       formRef.current?.setErrors({});
       const schema = Yup.object().shape({
@@ -52,8 +53,11 @@ const SignIn: React.FC = () => {
         abortEarly: false,
       });
 
+      console.log({ data });
+
       await signIn({ email: data.email, password: data.password });
     } catch (error) {
+      console.log({ error });
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationErrors(error);
         formRef.current?.setErrors(errors);
